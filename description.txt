@@ -1,0 +1,1 @@
+Easily embed youtube/vimeo videos into your pages and articles.

@@ -26,17 +26,28 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
         preg_match_all('/\[\[[a-z]+: ?([^\]]*)\]\]/', $content, $matches);
 
         foreach($matches[1] as $k => $url) {
+            $video = false;
             if (strpos($url, 'youtube')) {
-                preg_match('~\?v=([^\/&]+)~', $url, $id);
-                $smarty->assign('youtubeid', $id[1]);
+                if (!strpos($url, 'user')) {
+                    preg_match('~\?v=([^\/&]+)~', $url, $id);
+                    $smarty->assign('youtubeid', $id[1]);
+                    $video = true;                
+                } else {
+                    $id = array_pop(explode('/', $url));
+                    $smarty->assign('youtubeid', $id);
+                    $video = true;                
+                }
             }
             if (strpos($url, 'vimeo')) {
                 preg_match('~com\/([^\/]+)~', $url, $id);
+                $video = true;
                 $smarty->assign('vimeoid', $id[1]);
             }
-            /* Get the embed html */
-            $html = $smarty->fetch('jojo_videoembed.tpl');
-            $content = str_replace($matches[0][$k], $html, $content);
+            if ($video) {
+                /* Get the embed html */
+                $html = $smarty->fetch('jojo_videoembed.tpl');
+                $content = str_replace($matches[0][$k], $html, $content);
+            }
         }
 
         return $content;

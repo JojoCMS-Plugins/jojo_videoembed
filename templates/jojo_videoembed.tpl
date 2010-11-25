@@ -1,6 +1,6 @@
 {if $youtubeid}
 <div class="youtube-video">
-<iframe class="youtube-player" type="text/html" width="{$videow}" height="{$videoh}" src="http://www.youtube.com/embed/{$youtubeid}" frameborder="0">
+<iframe class="youtube-player" width="{$videow}" height="{$videoh}" src="http://www.youtube.com/embed/{$youtubeid}" frameborder="0">
 </iframe>
 </div>
 {elseif $vimeoid}

@@ -26,12 +26,22 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
         preg_match_all('/\[\[[a-z]+: ?([^\]]*)\]\]/', $content, $matches);
 
         foreach($matches[1] as $k => $url) {
+            $smarty->assign('videourl', $url);
+            if (strpos($url, ':dim')) {
+                $url = explode(':dim', $url);
+                $dim = explode('x', $url[1]);
+                $smarty->assign('videow', $dim[0]);
+                $smarty->assign('videoh', $dim[1]);
+                $url = $url[0];
+            }
             $video = false;
             if (strpos($url, 'youtube')) {
                 if (!strpos($url, 'user')) {
                     preg_match('~v=([^\/&]+)~', $url, $id);
+                    if ($id) {
                     $smarty->assign('youtubeid', $id[1]);
-                    $video = true;                
+                    }
+                    $video = true;
                 } else {
                     $id = array_pop(explode('/', $url));
                     $smarty->assign('youtubeid', $id);

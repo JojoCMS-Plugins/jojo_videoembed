@@ -5,4 +5,6 @@
 </div>
 {elseif $vimeoid}
 <iframe src="http://player.vimeo.com/video/{$vimeoid}" width="{$videow}" height="{$videoh}" frameborder="0"></iframe>
+{else}
+<a href="{$videourl}">{$videourl}</a>
 {/if}

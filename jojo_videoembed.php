@@ -38,6 +38,9 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
             if (strpos($url, 'youtube')) {
                 if (!strpos($url, 'user')) {
                     preg_match('~v=([^\/&]+)~', $url, $id);
+                    if (!$id) { 
+                        preg_match('~/v/([^\/&]+)~', $url, $id);
+                    }
                     if ($id) {
                     $smarty->assign('youtubeid', $id[1]);
                     }
@@ -62,5 +65,4 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
 
         return $content;
     }
-
 }

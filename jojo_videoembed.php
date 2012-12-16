@@ -35,10 +35,10 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
                 $url = $url[0];
             }
             $video = false;
-            if (strpos($url, 'youtube')) {
-                if (!strpos($url, 'user')) {
+            if (strpos($url, 'youtu')) {
+                if (!strpos($url, 'user') && !strpos($url, 'youtu.be')) {
                     preg_match('~v=([^\/&]+)~', $url, $id);
-                    if (!$id) { 
+                    if (!$id) {
                         preg_match('~/v/([^\/&]+)~', $url, $id);
                     }
                     if ($id) {
@@ -48,7 +48,7 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
                 } else {
                     $id = array_pop(explode('/', $url));
                     $smarty->assign('youtubeid', $id);
-                    $video = true;                
+                    $video = true;
                 }
             }
             if (strpos($url, 'vimeo')) {

@@ -46,7 +46,8 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
                     }
                     $video = true;
                 } else {
-                    $id = array_pop(explode('/', $url));
+                    $id = explode('/', $url);
+                    $id = array_pop($id);
                     $smarty->assign('youtubeid', $id);
                     $video = true;
                 }

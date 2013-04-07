@@ -33,4 +33,16 @@ $_options[] = array(
     'plugin'      => 'jojo_videoembed'
 );
 
+$_options[] = array(
+    'id'          => 'videoembed_responsive',
+    'category'    => 'Video',
+    'label'       => 'Responsive Video',
+    'description' => 'Include FitVids code for scaling video to fit the container width (use css max-width to set a maximum scaling if required)',
+    'type'        => 'radio',
+    'default'     => 'no',
+    'options'     => 'yes,no',
+);
+
+Jojo::addHook('foot', 'footjs', 'jojo_videoembed');
+
 Jojo::addFilter('output', 'videoembed', 'jojo_videoembed');

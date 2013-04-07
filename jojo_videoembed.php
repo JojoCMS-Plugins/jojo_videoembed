@@ -66,4 +66,17 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
 
         return $content;
     }
+
+    public static function footjs()
+    {
+        return Jojo::getOption('videoembed_responsive', 'no')=='yes' ? '<script>
+        /*<![CDATA[*/
+        $(document).ready(function() {
+                $(".container").fitVids();
+        });
+        /*]]>*/
+        </script>
+        ': '';
+    }
+
 }

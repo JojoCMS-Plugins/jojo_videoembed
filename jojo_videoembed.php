@@ -25,7 +25,7 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
         $smarty->assign('videoh', Jojo::getOption('videoembed_height', 350));
 
         /* Find all video filter tags */
-        preg_match_all('/\[\[[a-z]+: ?([^\]]*)\]\]/', $content, $matches);
+        preg_match_all('/\[\[[a-z,A-Z]+: ?([^\]]*)\]\]/', $content, $matches);
 
         foreach($matches[1] as $k => $url) {
             $smarty->assign('videourl', $url);
@@ -37,8 +37,8 @@ class Jojo_Plugin_jojo_videoembed extends Jojo_Plugin
                 $url = $url[0];
             }
             $video = false;
-            if (strpos($url, 'youtu')) {
-                if (!strpos($url, 'user') && !strpos($url, 'youtu.be')) {
+            if (strpos(strtolower($url), 'youtu')) {
+                if (!strpos($url, 'user') && !strpos(strtolower($url), 'youtu.be')) {
                     preg_match('~v=([^\/&]+)~', $url, $id);
                     if (!$id) {
                         preg_match('~/v/([^\/&]+)~', $url, $id);
